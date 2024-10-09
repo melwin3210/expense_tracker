@@ -1,19 +1,21 @@
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ManageExpenses from "./screens/ManageExpenses";
 import RecentExpenses from "./screens/RecentExpenses";
 import AllExpenses from "./screens/AllExpenses";
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
 const ExpenseOverview = () => {
-  <BottomTabs.Navigator>
-    <BottomTabs.Screen name="RecentExpenses" component={RecentExpenses} />
-    <BottomTabs.Screen name="AllExpenses" component={AllExpenses} />
-  </BottomTabs.Navigator>;
+  return (
+    <BottomTabs.Navigator>
+      <BottomTabs.Screen name="RecentExpenses" component={RecentExpenses} />
+      <BottomTabs.Screen name="AllExpenses" component={AllExpenses} />
+    </BottomTabs.Navigator>
+  );
 };
 export default function App() {
   return (
