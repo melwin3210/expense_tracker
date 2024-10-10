@@ -14,9 +14,15 @@ const ManageExpenses = ({ route, navigation }) => {
     });
   }, [navigation, isEditing]);
 
-  const cancelHandler = () => {}
-  const addHandler = () => {}
-  const deleteHandler = () => {}
+  const cancelHandler = () => {
+    navigation.goBack()
+  }
+  const addHandler = () => {
+    navigation.goBack()
+  }
+  const deleteHandler = () => {
+    navigation.goBack()
+  }
     return (
     <View style={styles.container}>
       <View style={styles.buttonContainer} >
@@ -29,6 +35,7 @@ const ManageExpenses = ({ route, navigation }) => {
           icon="trash"
           size={36}
           color={GlobalStyles.colors.error500}
+          onPress={deleteHandler}
         />
         </View>
       )}
