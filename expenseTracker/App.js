@@ -9,6 +9,8 @@ import { GlobalStyles } from "./constants/styles";
 import {Ionicons} from '@expo/vector-icons'
 import IconButton from "./UI/IconButton";
 import { ExpensesContextProvider } from "./store/expenses-context";
+import { Provider } from "react-redux";
+import { store } from "./store/redux/store/store";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -49,7 +51,8 @@ export default function App() {
   return (
     <>
       <StatusBar style="light"></StatusBar>
-      <ExpensesContextProvider>
+      {/* <ExpensesContextProvider> */}
+      <Provider store={store} >
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
@@ -71,7 +74,8 @@ export default function App() {
           ></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
-      </ExpensesContextProvider>
+      </Provider>
+      {/* </ExpensesContextProvider> */}
     </>
   );
 }
