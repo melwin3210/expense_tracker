@@ -9,7 +9,7 @@ import {
   addExpense,
   deleteExpense,
   updateExpense,
-} from "../store/redux/store/expense";
+} from "../store/redux/slice/expensesSlice";
 
 const ManageExpenses = ({ route, navigation }) => {
   const editedExpenseId = route.params?.expenseId;
