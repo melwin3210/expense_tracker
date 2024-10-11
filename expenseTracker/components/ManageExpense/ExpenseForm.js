@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Input from "./Input";
+import Button from "../../UI/Button";
+import { getFormattedDate } from "../../utils/date";
 
-const ExpenseForm = () => {
+const ExpenseForm = ({cancelHandler, isEditing, onSubmit, defaultValue}) => {
   const [inputValue, setInputValue] = useState({
-    amount: "",
-    date: "",
-    description: "",
+    amount: defaultValue ? defaultValue.amount.toString() : '',
+    date: defaultValue ? getFormattedDate(defaultValue.date): '',
+    description: defaultValue? defaultValue.description: ''
   });
   const inputChangeHandler = (inputId, enteredValue) => {
     setInputValue((currentValue) => {
@@ -17,6 +19,16 @@ const ExpenseForm = () => {
       };
     });
   };
+  const submitHandler = () => {
+    const expense = {
+        amount : +inputValue.amount,
+        date: new Date(inputValue.date),
+        description: inputValue.description
+    }
+    onSubmit(expense)
+
+    
+  }
   
   return (
     <View style={styles.form}>
@@ -51,6 +63,10 @@ const ExpenseForm = () => {
           value: inputValue.description,
         }}
       />
+      <View style={styles.buttonContainer} >
+        <Button mode='flat' onPress={cancelHandler} style={styles.button} >Cancel</Button>
+        <Button onPress={submitHandler} style={styles.button} >{isEditing ? 'Update' : 'Add'}</Button>
+      </View>
     </View>
   );
 };
@@ -75,4 +91,13 @@ const styles = StyleSheet.create({
   rowInput: {
     flex: 1,
   },
+  buttonContainer:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  button:{
+    minWidth:120,
+    marginHorizontal:8
+  }
 });
