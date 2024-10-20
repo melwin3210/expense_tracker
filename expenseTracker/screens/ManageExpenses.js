@@ -2,9 +2,9 @@ import { useLayoutEffect, useContext } from "react";
 import { StyleSheet, View } from "react-native";
 import IconButton from "../UI/IconButton";
 import { GlobalStyles } from "../constants/styles";
-import Button from "../UI/Button";
 import { ExpensesContext } from "../store/expenses-context";
 import ExpenseForm from "../components/ManageExpense/ExpenseForm";
+import { storeExpense } from "../utils/http";
 
 const ManageExpenses = ({ route, navigation }) => {
   const editedExpenseId = route.params?.expenseId;
@@ -21,11 +21,12 @@ const ManageExpenses = ({ route, navigation }) => {
   const cancelHandler = () => {
     navigation.goBack()
   }
-  const confirmHandler = (expenseDetails) => {
+ const  confirmHandler = async(expenseDetails) => {
     if(isEditing){
       expensesCtx.updateExpense(editedExpenseId,expenseDetails)
     }else{
-      expensesCtx.addExpense(expenseDetails)
+      const id = await storeExpense(expenseDetails)
+      expensesCtx.addExpense({id:id, ...expenseDetails})
     }
     navigation.goBack()
   }
