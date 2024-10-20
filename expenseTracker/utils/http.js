@@ -2,12 +2,15 @@ import axios from "axios";
 const BACKEND_URL =
   "https://expenses-b8e3a-default-rtdb.asia-southeast1.firebasedatabase.app";
 export const storeExpense = async (expenseData) => {
-  const response = await axios.post(BACKEND_URL + "/expenses.json", expenseData);
+  const response = await axios.post(
+    BACKEND_URL + "/expenses.json",
+    expenseData
+  );
   const id = response.data.name;
   return id;
 };
 
-export const fetchExpenses = async (expenseData) => {
+export const fetchExpenses = async () => {
   const response = await axios.get(BACKEND_URL + "/expenses.json");
   const expenses = [];
 
